@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+SCRIPT_HOME=${0:A:h}
+export FORMATTER_NAME=clang
+exec zsh "${SCRIPT_HOME}/.run-format.zsh" "$@"
