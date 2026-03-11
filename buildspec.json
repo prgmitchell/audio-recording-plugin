@@ -38,7 +38,7 @@
     },
     "name": "audio-recording-plugin",
     "displayName": "Audio Recording Plugin",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "author": "prgmitchell",
     "website": "https://github.com/prgmitchell",
     "email": "mitchell@example.com"
