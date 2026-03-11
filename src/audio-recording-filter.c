@@ -738,6 +738,7 @@ static obs_properties_t *filter_properties(void *data)
 	obs_data_t *current_settings = NULL;
 	struct dstr status = {0};
 	bool has_error = false;
+	bool is_active = false;
 
 	status_prop = obs_properties_add_text(props, "status_text", obs_module_text("StatusLabel"), OBS_TEXT_INFO);
 
@@ -759,6 +760,7 @@ static obs_properties_t *filter_properties(void *data)
 	if (f) {
 		pthread_mutex_lock(&f->mutex);
 		build_status_text_locked(f, &status, &has_error);
+		is_active = f->recording;
 		pthread_mutex_unlock(&f->mutex);
 		current_settings = obs_source_get_settings(f->source);
 	} else {
@@ -774,6 +776,7 @@ static obs_properties_t *filter_properties(void *data)
 		dstr_free(&status_line);
 	}
 	obs_property_text_set_info_type(status_prop, has_error ? OBS_TEXT_INFO_ERROR : OBS_TEXT_INFO_NORMAL);
+	obs_property_set_enabled(mode_prop, !is_active);
 	dstr_free(&status);
 
 	if (hint_prop)
